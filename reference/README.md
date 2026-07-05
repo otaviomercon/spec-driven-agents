@@ -13,5 +13,7 @@ naming and stack to yours. They are not an installable package (the installable 
 | [`ci/auto-merge.yml`](ci/auto-merge.yml) | Squash-merge automatically when CI goes green |
 | [`traceability/log-hook.py`](traceability/log-hook.py) | Agent-runtime hook: one clean line per request / mutating action (read-only noise filtered at the source) |
 | [`traceability/digest.py`](traceability/digest.py) | Deterministic daily digest: raw logs → grouped signal (requests, edits, PRs), ~50% noise removed, 0 tokens |
+| [`hooks/`](hooks/README.md) | **Guardrails as code**: block direct pushes to main (branch+PR made mechanical), block replies matching forbidden style patterns (configurable wordlist). Fail-open, anti-loop, anti-false-positive |
+| [`prefs/`](prefs/propagate-prefs.py) | **Preferences propagation**: one canonical working-rules block stamped into every repo's CLAUDE.md/AGENTS.md, versioned, preserving per-repo local lines |
 
 Assumptions: Git + [GitHub CLI](https://cli.github.com) (`gh`), zsh/python3 (macOS defaults).
