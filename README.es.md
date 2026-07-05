@@ -29,7 +29,7 @@ es libre.
 | Directorio | Qué es |
 |---|---|
 | [`docs/`](docs/es/metodologia.md) | **El playbook** — la metodología completa, en 3 idiomas |
-| [`control-plane/`](control-plane/README.md) | **Instalable** — un plano de control genérico en la barra de menú (macOS/SwiftBar) para procesos con IA: motor por proceso, badges de salud, acciones bajo demanda |
+| [`control-plane/`](control-plane/README.md) | **Instalable** — dos plugins de barra de menú (macOS/SwiftBar): 🧠 control de motores (motor de IA por proceso, salud, acciones) y 📦 **el box**, monitor vivo del backlog (bloqueadas / PRs por revisar / cola auto / entregadas) |
 | [`reference/`](reference/) | **Scripts adaptables** — hook de trazabilidad, digestor determinista de logs, templates de CI/auto-merge, plantillas de tarea. Código de referencia, no plug-and-play |
 
 ## Los pilares (versión corta)

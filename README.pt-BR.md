@@ -30,7 +30,7 @@ revisão humana**: CI em cada PR, deploy com gate de build/testes, migrações s
 | Diretório | O que é |
 |---|---|
 | [`docs/`](docs/pt-BR/metodologia.md) | **O playbook** — a metodologia completa, em 3 idiomas |
-| [`control-plane/`](control-plane/README.md) | **Instalável** — um plano de controle genérico na barra de menu (macOS/SwiftBar) para processos com IA: motor por processo, badges de saúde, ações sob demanda |
+| [`control-plane/`](control-plane/README.md) | **Instalável** — dois plugins de barra de menu (macOS/SwiftBar): 🧠 controle de motores (motor de IA por processo, saúde, ações) e 📦 **o box**, monitor vivo do backlog (bloqueadas / PRs para revisar / fila auto / entregues) |
 | [`reference/`](reference/) | **Scripts adaptáveis** — hook de rastreabilidade, digestor determinístico de logs, templates de CI/auto-merge, templates de tarefa. Código de referência, não plug-and-play |
 
 ## Os pilares (versão curta)

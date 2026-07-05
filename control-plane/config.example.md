@@ -19,6 +19,9 @@
 - **`logs_dir`** — where your processes write logs and leave `<name>.FAILED` markers on failure.
   Any marker shows as a red badge in the menu until the file is removed (self-healing: your process
   should remove its own marker when it recovers).
+- **`backlogs`** — comma-separated directories containing your task files (the format in
+  `reference/backlog/task-template.md`), one directory per project. The 📦 box plugin scans them
+  recursively and shows blocked / PR-to-review / auto-queue / delivered.
 
 ## Config
 
@@ -29,6 +32,7 @@ account_default = main
 accounts        = main,work
 local_model     = gemma3:4b
 logs_dir        = ~/.local/state/spec-driven-agents/logs
+backlogs        = ~/backlogs/my-app,~/backlogs/other-app
 
 # --- per-process overrides (the plugin writes these; you can too) ---
 
