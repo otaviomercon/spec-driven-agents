@@ -1,0 +1,39 @@
+{
+  "//": "Example Claude Code hook wiring — merge into ~/.claude/settings.json (adjust paths).",
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          { "type": "command", "command": "python3 /path/to/reference/hooks/guard-no-push-main.py 2>/dev/null" }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          { "type": "command", "command": "python3 /path/to/reference/traceability/log-hook.py 2>/dev/null || true" }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "hooks": [
+          { "type": "command", "command": "python3 /path/to/reference/traceability/log-hook.py 2>/dev/null || true", "async": true }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          { "type": "command", "command": "python3 /path/to/reference/traceability/log-hook.py 2>/dev/null || true" }
+        ]
+      },
+      {
+        "hooks": [
+          { "type": "command", "command": "python3 /path/to/reference/hooks/style-guard.py 2>/dev/null" }
+        ]
+      }
+    ]
+  }
+}

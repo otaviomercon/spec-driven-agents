@@ -1,0 +1,20 @@
+# style-guard wordlist — copy to ~/.config/spec-driven-agents/style-guard.txt and edit.
+# One entry per line: plain words match with word boundaries (case-insensitive);
+# lines starting with `re:` are regexes; `msg:` sets the rewrite instruction.
+
+# --- Example A: block placeholder text the agent should never ship ---
+lorem ipsum
+re:TODO:?\s*(fill|complete|write)
+re:\[insert [^\]]+\]
+
+# --- Example B (real production use): enforce neutral Latin American Spanish ---
+# (blocks Argentinian voseo forms; uncomment to use)
+# vos
+# tenés
+# podés
+# querés
+# agregá
+# mirá
+# acá
+
+msg: Rewrite the reply without these forms. Keep the same content and language, fixing only the style.
