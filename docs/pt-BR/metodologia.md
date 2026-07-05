@@ -51,6 +51,11 @@ repo: ~/Projects/meu-app
 um script determinístico — nunca editada à mão. Fonte de verdade = os arquivos de tarefa. Se um chat
 esquecer de regenerar, um job agendado regenera mesmo assim (self-healing).
 
+**Onde mora o backlog?** Em qualquer pasta de arquivos markdown puros sob git. O autor mantém o dele
+num vault do [Obsidian](https://obsidian.md) (agradável para navegar, linkar e capturar do celular),
+mas nada nesta metodologia depende do Obsidian — é markdown + git de ponta a ponta, e os agentes
+leem/escrevem com ferramentas de arquivo comuns.
+
 ## 3. Especificar conversando (o ofício do humano)
 
 A régua de qualidade: **uma tarefa está pronta quando um agente conseguiria executá-la sem te
