@@ -26,7 +26,7 @@ human review**: CI on every PR, deploy gated on build/tests, safe migrations. Th
 | Directory | What it is |
 |---|---|
 | [`docs/`](docs/en/methodology.md) | **The playbook** — the full methodology, in 3 languages |
-| [`control-plane/`](control-plane/README.md) | **Installable** — a generic menu-bar control plane (macOS/SwiftBar) for AI-powered processes: per-process engine selection, health badges, on-demand actions |
+| [`control-plane/`](control-plane/README.md) | **Installable** — two menu-bar plugins (macOS/SwiftBar): 🧠 engine control (per-process AI engine, health, actions) and 📦 **the box**, a live backlog monitor (blocked / PRs to review / auto queue / delivered) |
 | [`reference/`](reference/) | **Adaptable scripts** — traceability hook, deterministic log digester, CI/auto-merge templates, task templates. Reference code, not plug-and-play |
 
 ## The pillars (short version)

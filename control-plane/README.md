@@ -3,7 +3,15 @@
 **🌎 EN** — *(the [methodology docs](../docs/en/methodology.md) are available in
 [Español](../docs/es/metodologia.md) and [Português](../docs/pt-BR/metodologia.md))*
 
-A generic menu-bar control plane for AI-powered processes. One config file drives everything:
+A generic menu-bar control plane for AI-powered processes — **two plugins, one config file**:
+
+- **🧠 `control-plane.5m.sh`** — operates the *engines*: health, per-process AI engine, local models,
+  on-demand actions.
+- **📦 `box.1m.sh`** — monitors the *work*: your backlog(s) projected live in the menu bar — blocked
+  tasks (need your decision), PRs to review, the auto queue the scheduled agent will drain, and recent
+  deliveries. This is where you watch the "you specify, agents execute" loop actually running.
+
+What the 🧠 gives you:
 
 - **Health badges** — any process that fails leaves `<name>.FAILED` in your logs dir → the menu icon
   turns 🔴N with the message, a link to the log and a "mark resolved" button. Markers are removed by
@@ -18,20 +26,38 @@ A generic menu-bar control plane for AI-powered processes. One config file drive
 ## Install
 
 1. Install [SwiftBar](https://swiftbar.app) (`brew install swiftbar`) and pick a plugins folder.
-2. Copy this `control-plane/` directory somewhere stable, then link the plugin into your SwiftBar
+2. Copy this `control-plane/` directory somewhere stable, then link the plugins into your SwiftBar
    plugins folder:
    ```
    ln -s /path/to/control-plane/control-plane.5m.sh <swiftbar-plugins>/control-plane.5m.sh
+   ln -s /path/to/control-plane/box.1m.sh           <swiftbar-plugins>/box.1m.sh
    ```
-   (`5m` in the filename = refresh every 5 minutes; rename to taste.)
+   (`5m`/`1m` in the filename = refresh interval; rename to taste.)
 3. Create your config:
    ```
    mkdir -p ~/.config/spec-driven-agents ~/.local/state/spec-driven-agents/logs
    cp config.example.md ~/.config/spec-driven-agents/config.md
    ```
+   Point the `backlogs` key at the folder(s) where your task files live.
 4. (Optional, local tier) Install [Ollama](https://ollama.com) and pull a small model:
    `ollama pull gemma3:4b`.
-5. Refresh SwiftBar. You should see 🧠 (or ☁️ if `llm_local = off`).
+5. Refresh SwiftBar. You should see 🧠 (or ☁️ if `llm_local = off`) and 📦.
+
+## The 📦 box (backlog monitor)
+
+The box is a **pure projection** of your task files — zero tokens, zero state of its own, so it can
+never drift from reality. It scans every `.md` with a `status:` frontmatter under your `backlogs`
+dirs and shows, in priority order of attention:
+
+| Section | Meaning |
+|---|---|
+| 🔴 **Blocked** | tasks an agent stopped on — these need *your* decision |
+| 🟢 **PR to review** | `in_progress` tasks with their PR attached (one click to open) |
+| 🔵 **Auto queue** | `specified` + `auto: yes` — what the scheduled agent will pick up next |
+| ✅ **Delivered** | `done`, newest first |
+
+The menu-bar badge summarizes it (`📦 2🔴 1🟢 4🔵`) so you know at a glance whether anything needs
+you. Clicking a task opens its file; specifying happens in chat, monitoring happens here.
 
 ## Wire your first process
 
