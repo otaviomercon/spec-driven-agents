@@ -1,0 +1,29 @@
+name: CI
+
+# Runs on every PR and push to main. THE BUILD IS THE GATE: if it fails, auto-merge won't happen
+# and the gated deploy keeps production on the last good version. Lint is informative (doesn't block)
+# so agents aren't stopped by style while correctness is protected.
+#
+# Adapt the steps to your stack; the pattern is: gate on what breaks production, inform on the rest.
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+      - name: Lint (informative — does not block)
+        run: npm run lint || echo "::warning::lint failed (not blocking)"
+      - name: Build (THE gate)
+        run: npm run build
+      - name: Tests (gate, if present)
+        run: npm test --if-present

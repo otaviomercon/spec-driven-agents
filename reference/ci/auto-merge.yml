@@ -1,0 +1,42 @@
+name: auto-merge
+
+# Squash-merges the PR automatically when CI goes green. Safety comes from the green CI (and from the
+# gated deploy), not from human review — that's what makes agent-opened PRs land on their own.
+#
+# REQUIREMENTS (repo settings, not code):
+#  - Settings → Actions → "Allow GitHub Actions to create and approve pull requests"
+#  - Workflow permissions = read/write
+#
+# Why not GitHub's native auto-merge: it requires branch protection (not available on private repos
+# on the free plan). This workflow needs nothing but the settings above.
+#
+# Note: a merge performed with GITHUB_TOKEN does NOT trigger `on: push` workflows. If you need a
+# post-merge step (e.g. applying DB migrations), put it as a job in THIS workflow, gated on the
+# merge job's output — a separate push-triggered workflow will never fire for these merges.
+
+on:
+  workflow_run:
+    workflows: ["CI"]
+    types: [completed]
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  merge:
+    if: >-
+      github.event.workflow_run.conclusion == 'success' &&
+      github.event.workflow_run.event == 'pull_request' &&
+      github.event.workflow_run.head_repository.full_name == github.repository
+    runs-on: ubuntu-latest
+    steps:
+      - env:
+          GH_TOKEN: ${{ github.token }}
+          BRANCH: ${{ github.event.workflow_run.head_branch }}
+          REPO: ${{ github.repository }}
+        run: |
+          PR=$(gh pr list -R "$REPO" --head "$BRANCH" --state open --json number -q '.[0].number')
+          if [ -z "$PR" ]; then echo "no open PR for $BRANCH — nothing to merge"; exit 0; fi
+          echo "CI green on #$PR ($BRANCH) → squash merge"
+          gh pr merge --squash --delete-branch "$PR" -R "$REPO"
