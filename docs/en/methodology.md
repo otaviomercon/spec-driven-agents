@@ -50,6 +50,11 @@ repo: ~/Projects/my-app
 deterministic script — never edited by hand. Source of truth = task files. If a chat forgets to
 regenerate, a scheduled job regenerates it anyway (self-healing).
 
+**Where does the backlog live?** Any folder of plain markdown files under git. The author keeps it in
+an [Obsidian](https://obsidian.md) vault (pleasant for browsing, linking and mobile capture), but
+nothing in this methodology depends on Obsidian — it's markdown + git all the way down, and agents
+read/write it with ordinary file tools.
+
 ## 3. Specifying by chat (the human's craft)
 
 The quality bar: **a task is ready when an agent could execute it without asking you anything.**
